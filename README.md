@@ -61,28 +61,36 @@ Iterate `num_iterations` times:
 
 ---
 
-### Manual Model Functions:
-python
+### Manual Model Functions
+
+```python
 class LinearRegression:
     def __init__(self, learning_rate=0.01, num_iterations=1000):
         self.alpha = learning_rate
         self.num_iterations = num_iterations
+
     def train(self, X, y):
         # Initialize parameters
         self.theta = np.zeros(X.shape[1])
         self.theta_0 = 0
         m = len(y)  # Number of training examples
+
         for _ in range(self.num_iterations):
             # Compute predictions
             y_hat = X.dot(self.theta) + self.theta_0
+
             # Compute cost
             cost = (1 / (2 * m)) * np.sum((y_hat - y) ** 2)
+
             # Compute gradients
             dtheta = (1 / m) * X.T.dot(y_hat - y)
             dtheta_0 = (1 / m) * np.sum(y_hat - y)
+
             # Update parameters
             self.theta -= self.alpha * dtheta
             self.theta_0 -= self.alpha * dtheta_0
+
     def predict(self, X_test):
         # Compute predictions
         return X_test.dot(self.theta) + self.theta_0
+
